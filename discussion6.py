@@ -68,11 +68,10 @@ class HorseRaces:
 
     fastest_race = None
     fastest_time = 999.9
-
     for race, time in race_times.items():
-        if time < fastest_time:
-            fastest_time = time
-            fastest_race = race
+            if time < fastest_time:
+                fastest_time = time
+                fastest_race = race
 
     return (fastest_race, fastest_time)
 
@@ -83,10 +82,10 @@ class HorseRaces:
     def horse_personal_best(self):
         personal_bests = {}
 
-    for horse in self.race_dict:
-        fastest_race, fastest_time = self.horse_fastest_race(horse)
+        for horse in self.race_dict:
+            fastest_race, fastest_time = self.horse_fastest_race(horse)
         personal_bests[horse] = (fastest_race, fastest_time)
-    return personal_bests
+        return personal_bests
 
 
 ###############################################################################
@@ -94,14 +93,19 @@ class HorseRaces:
 ###############################################################################
 
     def get_average_time(self):
-        '''
-        Calculate the average race time for each horse.
+        averages = {}
 
-        Returns:
-            A dictionary with each horse and their average time.
-            EXAMPLE: {'Gold Ship': 16.5, 'Daiwa Scarlet': 17.2}
-        '''
-        pass
+        for horse, race_times in self.race_dict.items():
+            total = 0.0
+        count = 0
+
+        for time in race_times.values():
+            total += time
+            count += 1
+
+        averages[horse] = total / count if count > 0 else 0.0
+
+        return averages
 
 ###############################################################################
 ##### DO NOT MODIFY THE UNIT TESTS BELOW!
